@@ -15,16 +15,23 @@ public class Inscripcion {
 
     private Double costo;
 
+    private Integer cantidad;
+
+    private String fecha;
+
     private Double total;
 
     public Inscripcion() {
     }
 
-    public Inscripcion(Long id, String estudiante, String cursoNombre, Double costo, Double total) {
+    public Inscripcion(Long id, String estudiante, String cursoNombre, Double costo, Integer cantidad, String fecha,
+            Double total) {
         this.id = id;
         this.estudiante = estudiante;
         this.cursoNombre = cursoNombre;
         this.costo = costo;
+        this.cantidad = cantidad;
+        this.fecha = fecha;
         this.total = total;
     }
 
@@ -46,6 +53,22 @@ public class Inscripcion {
 
     public Double getTotal() {
         return total;
+    }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public void setId(Long id) {

@@ -18,7 +18,7 @@ public class InscripcionService {
     }
 
     public Inscripcion guardarInscripcion(Inscripcion inscripcion) {
-        inscripcion.setTotal(inscripcion.getCosto());
+        inscripcion.setTotal(inscripcion.getCosto() * inscripcion.getCantidad());
         return repository.save(inscripcion);
     }
 }
