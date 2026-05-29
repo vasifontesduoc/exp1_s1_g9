@@ -1,5 +1,6 @@
 package com.duoc.exp1_s1_g9.controller;
 
+import com.duoc.exp1_s1_g9.dto.CursoDTO;
 import com.duoc.exp1_s1_g9.entity.Curso;
 import com.duoc.exp1_s1_g9.service.CursoService;
 import org.springframework.web.bind.annotation.*;
@@ -22,12 +23,27 @@ public class CursoController {
     }
 
     @GetMapping
-    public List<Curso> listarCursos() {
-        return service.obtenerCursos();
+    public List<CursoDTO> listarCursos() {
+
+        return service.obtenerCursos()
+                .stream()
+                .map(curso -> new CursoDTO(
+                        curso.getId(),
+                        curso.getNombre(),
+                        curso.getDescripcion(),
+                        curso.getDuracion()))
+                .toList();
     }
 
     @PostMapping
-    public Curso guardarCurso(@RequestBody Curso curso) {
-        return service.guardarCurso(curso);
+    public CursoDTO guardarCurso(@RequestBody Curso curso) {
+
+        Curso cursoGuardado = service.guardarCurso(curso);
+
+        return new CursoDTO(
+                cursoGuardado.getId(),
+                cursoGuardado.getNombre(),
+                cursoGuardado.getDescripcion(),
+                cursoGuardado.getDuracion());
     }
 }

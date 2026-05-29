@@ -1,0 +1,8 @@
+===== RESUMEN INSCRIPCION =====
+ID: 3
+Estudiante: Bastián V
+Curso: AWS Cloud
+Costo: 70000.0
+Cantidad: 2
+Fecha: 2026-05-28
+Total: 140000.0
