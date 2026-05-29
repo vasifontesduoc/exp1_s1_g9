@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.File;
 import java.util.List;
 
 @Service
@@ -14,6 +15,9 @@ public class InscripcionService {
 
     @Autowired
     private InscripcionRepository repository;
+
+    @Autowired
+    private S3Service s3Service;
 
     public List<Inscripcion> listarInscripciones() {
         return repository.findAll();
@@ -25,18 +29,21 @@ public class InscripcionService {
 
         Inscripcion guardada = repository.save(inscripcion);
 
-        generarArchivoTXT(guardada);
+        File archivo = generarArchivoTXT(guardada);
+        s3Service.subirArchivo(archivo);
 
         return guardada;
     }
 
-    private void generarArchivoTXT(Inscripcion inscripcion) {
+    private File generarArchivoTXT(Inscripcion inscripcion) {
 
         String nombreArchivo = "inscripcion_" + inscripcion.getId() + ".txt";
 
         String ruta = "src/main/resources/archivos/" + nombreArchivo;
 
-        try (FileWriter writer = new FileWriter(ruta)) {
+        File archivo = new File(ruta);
+
+        try (FileWriter writer = new FileWriter(archivo)) {
 
             writer.write("===== RESUMEN INSCRIPCION =====\n");
             writer.write("ID: " + inscripcion.getId() + "\n");
@@ -49,10 +56,12 @@ public class InscripcionService {
 
             System.out.println("Archivo TXT generado correctamente");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
 
             System.out.println("Error al generar archivo TXT");
             e.printStackTrace();
         }
+
+        return archivo;
     }
 }

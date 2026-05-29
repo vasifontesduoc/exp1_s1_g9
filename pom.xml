@@ -41,6 +41,13 @@
 			<version>23.3.0.23.09</version>
 		</dependency>
 
+		<!-- aws s3 -->
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>s3</artifactId>
+			<version>2.25.26</version>
+		</dependency>
+
 		<!-- Oracle Wallet -->
 		<dependency>
 			<groupId>com.oracle.database.security</groupId>
